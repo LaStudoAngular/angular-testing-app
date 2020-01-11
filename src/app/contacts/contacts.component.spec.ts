@@ -30,4 +30,8 @@ describe('Contact Components Test', () => {
     contactsComponent.contacts = contactsList;
     expect(contactsComponent.contacts.length).toBe(1);
   });
+
+  afterEach(() => {
+    contactsComponent = null;
+  });
 });

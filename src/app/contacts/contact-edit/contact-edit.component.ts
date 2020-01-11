@@ -1,13 +1,16 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { MatDialog, MatDialogRef, MatSnackBar, MatSnackBarConfig } from '@angular/material';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
 import { Router } from '@angular/router';
 
-import { Contact, ContactService } from '../shared';
+import {
+  Contact,
+  ContactService,
+  InvalidEmailModalComponent,
+  InvalidPhoneNumberModalComponent,
+  countryDialingCodes,
+} from '../shared';
 import { constants } from './contact-edit.constants';
-import { InvalidEmailModalComponent } from '../shared';
-import { InvalidPhoneNumberModalComponent } from '../shared';
-import { countryDialingCodes } from '../shared';
 
 @Component({
   selector: 'app-contact-edit',
@@ -48,7 +51,7 @@ export class ContactEditComponent implements OnInit, OnDestroy {
   }
 
   public loadContact(): void {
-    this.route.params.subscribe(params => {
+    this.route.params.subscribe((params: Params) => {
       const id = +params['id'];
       this.contactService.getContact(id).then(contact => {
         this.isLoading = false;
