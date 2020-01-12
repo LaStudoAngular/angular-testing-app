@@ -88,11 +88,15 @@ describe('ContactEditComponent Tests', () => {
     it('should display contact name after update contact', fakeAsync(() => {
       const updateContact: Contact = {
         id: 1,
-        name: 'arnold'
+        name: 'arnold',
+        email: 'arnold@test.com',
+        number: '1231231230'
       };
       component.contact = {
         id: 3,
-        name: 'jordan'
+        name: 'jordan',
+        email: 'jordan@test.com',
+        number: '1231231230'
       };
 
       component.isLoading = false;
@@ -103,9 +107,8 @@ describe('ContactEditComponent Tests', () => {
 
       component.updateContact(updateContact);
       fixture.detectChanges();
-      const nameInputUpdate = rootElement.query(By.css('.contact-name'));
       tick(100);
-      expect(nameInputUpdate.nativeElement.value).toBe('arnold');
+      expect(nameInput.nativeElement.value).toBe('arnold');
     }));
   });
 });
