@@ -60,4 +60,18 @@ describe('ContactEditComponent Tests', () => {
     fixture.detectChanges();
     rootElement = fixture.debugElement;
   });
+  describe('saveContact method test', () => {
+    it('should display a contact name after contact is set', fakeAsync(() => {
+      const newContact: Contact = {
+        id: 2,
+        name: 'kevin'
+      };
+      component.isLoading = false;
+      component.saveContact(newContact);
+      fixture.detectChanges();
+      const inputName = rootElement.query(By.css('.contact-name'));
+      tick();
+      expect(inputName.nativeElement.value).toBe('kevin');
+    }));
+  });
 });
