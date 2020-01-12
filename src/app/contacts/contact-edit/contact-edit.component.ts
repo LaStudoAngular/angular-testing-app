@@ -35,17 +35,17 @@ export class ContactEditComponent implements OnInit, OnDestroy {
     private dialog: MatDialog,
   ) {}
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.loadContact();
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     if (this.modalRef) {
       this.modalRef.close();
     }
   }
 
-  public saveContact(contact: Contact) {
+  public saveContact(contact: Contact): void {
     contact.favorite = !contact.favorite;
     this.contactService.save(contact);
   }

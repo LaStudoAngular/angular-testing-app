@@ -37,4 +37,27 @@ describe('ContactEditComponent Tests', () => {
       component.contact = contact;
     },
   };
+  beforeEach(() => {
+    TestBed.configureTestingModule({
+      declarations: [
+        ContactEditComponent,
+        FavoriteIconDirective,
+        InvalidEmailModalComponent,
+        InvalidPhoneNumberModalComponent
+      ],
+      imports: [FormsModule, RouterTestingModule, NoopAnimationsModule, AppMaterialModule ],
+      providers: [{ provide: ContactService, useValue: contactServiceStub }]
+    });
+    TestBed.overrideModule(BrowserDynamicTestingModule, {
+      set: {
+        entryComponents: [InvalidEmailModalComponent, InvalidPhoneNumberModalComponent]
+      }
+    });
+  });
+  beforeEach(() => {
+    fixture = TestBed.createComponent(ContactEditComponent);
+    component = fixture.componentInstance;
+    fixture.detectChanges();
+    rootElement = fixture.debugElement;
+  });
 });
