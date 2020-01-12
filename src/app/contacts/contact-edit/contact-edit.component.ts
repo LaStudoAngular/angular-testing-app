@@ -52,8 +52,8 @@ export class ContactEditComponent implements OnInit, OnDestroy {
 
   public loadContact(): void {
     this.route.params.subscribe((params: Params) => {
-      const id = +params['id'];
-      this.contactService.getContact(id).then(contact => {
+      const id: number = Number(params['id']);
+      this.contactService.getContact(id).then((contact: Contact) => {
         this.isLoading = false;
         this.contact = contact;
       });

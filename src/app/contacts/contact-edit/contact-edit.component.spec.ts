@@ -74,4 +74,14 @@ describe('ContactEditComponent Tests', () => {
       expect(inputName.nativeElement.value).toBe('kevin');
     }));
   });
+  describe('loadContact method test', () => {
+    it('should desplay a contact name after load contact', fakeAsync(() => {
+      component.isLoading = false;
+      component.loadContact();
+      fixture.detectChanges();
+      const inputName = rootElement.query(By.css('.contact-name'));
+      tick();
+      expect(inputName.nativeElement.value).toEqual('jessy');
+    }));
+  });
 });
