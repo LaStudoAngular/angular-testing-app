@@ -75,13 +75,37 @@ describe('ContactEditComponent Tests', () => {
     }));
   });
   describe('loadContact method test', () => {
-    it('should desplay a contact name after load contact', fakeAsync(() => {
+    it('should display contact name after load contact', fakeAsync(() => {
       component.isLoading = false;
       component.loadContact();
       fixture.detectChanges();
       const inputName = rootElement.query(By.css('.contact-name'));
       tick();
       expect(inputName.nativeElement.value).toEqual('jessy');
+    }));
+  });
+  describe('updateContact method test', () => {
+    it('should display contact name after update contact', fakeAsync(() => {
+      const updateContact: Contact = {
+        id: 1,
+        name: 'arnold'
+      };
+      component.contact = {
+        id: 3,
+        name: 'jordan'
+      };
+
+      component.isLoading = false;
+      fixture.detectChanges();
+      const nameInput = rootElement.query(By.css('.contact-name'));
+      tick();
+      expect(nameInput.nativeElement.value).toBe('jordan');
+
+      component.updateContact(updateContact);
+      fixture.detectChanges();
+      const nameInputUpdate = rootElement.query(By.css('.contact-name'));
+      tick(100);
+      expect(nameInputUpdate.nativeElement.value).toBe('arnold');
     }));
   });
 });
