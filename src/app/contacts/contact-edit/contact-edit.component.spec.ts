@@ -110,5 +110,55 @@ describe('ContactEditComponent Tests', () => {
       tick(100);
       expect(nameInput.nativeElement.value).toBe('arnold');
     }));
+    it('should not update contact name when email is invalid', fakeAsync(() => {
+      const updateContact: Contact = {
+        id: 1,
+        name: 'colombo',
+        email: 'colombo@mail',
+        number: '1231231230'
+      };
+
+      component.contact = {
+        id: 6,
+        name: 'jordan',
+        email: 'jordan@test.com',
+        number: '1231231230'
+      };
+      component.isLoading = false;
+      fixture.detectChanges();
+      const nameInput = rootElement.query(By.css('.contact-name'));
+      tick();
+      expect(nameInput.nativeElement.value).toBe('jordan');
+
+      component.updateContact(updateContact);
+      fixture.detectChanges();
+      tick(100);
+      expect(nameInput.nativeElement.value).toBe('jordan');
+    }));
+    it('should not update contact name if phone number is invalid', fakeAsync(() => {
+      const contact: Contact = {
+        id: 1,
+        name: 'frank',
+        email: 'frank@mail.ru',
+        number: '123123123099999'
+      };
+      component.contact = {
+        id: 5,
+        name: 'jake',
+        email: 'jake@test.com',
+        number: '1231231230'
+      };
+      component.isLoading = false;
+      fixture.detectChanges();
+
+      const inputContact = rootElement.query(By.css('.contact-name'));
+      tick();
+      expect(inputContact.nativeElement.value).toBe('jake');
+
+      component.updateContact(contact);
+      fixture.detectChanges();
+      tick(500);
+      expect(inputContact.nativeElement.value).toBe('jake');
+    }));
   });
 });
